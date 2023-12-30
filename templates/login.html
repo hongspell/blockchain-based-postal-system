@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+        <title>sign in</title>
+        <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename = 'css/login.css') }}">
+	</head>
+
+	<body>
+		<div class="login">
+            <form method="POST" action="{{ url_for('login') }}">
+                <h2>user:</h2>
+                <div class="login_box">
+                    <label for="name" >username:</label>
+                    <input type="text" name="username" required="required" />
+                </div>
+                <div class="login_box">
+                    <label for="pwd">password:</label>
+                    <input type="password" name="password" required="required" />
+                </div>
+                <input type="submit" value="sign in">
+                <div style="text-align: right; margin-top: 12px;">
+                    <small>create an account: <a href="{{url_for('register')}}">sign up</a></small>
+                </div>
+                {% if error %}
+                <p>{{ error }}</p>
+                {% endif %}
+                {% if x %}
+                <p>{{ x }}</p>
+                {% endif %}
+            </form>
+		</div>
+
+	</body>
+</html>

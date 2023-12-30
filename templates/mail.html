@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> blockchain postal </title>
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename = 'css/style.css') }}">
+</head>
+<body>
+    <div class="contain">
+        <div class="left"></div>
+        <div class="center">
+            <form method="POST" action="{{ url_for('mail',username=username) }}">
+                <input type="submit" name="logout" value="log out">
+            </form>
+            {% if username %}
+                <p>welcome {{ username }}!</p>
+            {% endif %}
+            <p></p>
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+            <div>
+                <form method="POST" action="{{ url_for('mail',username=username) }}" enctype="multipart/form-data">
+                    <div class="frame">
+                        <label>send to:</label>
+                        <input type="text" name="receiver" />
+                        <div></div>
+                        <label>content:</label>
+                        <textarea name="mail-post-textarea" class="textareashow"></textarea>
+                        <div></div>
+                        <label>qrcode:</label>
+                        <input type="file" name="qrpostfile">
+                        <label class="custom-file-label" for="file"></label>
+                        <div></div>
+                        <input type="submit" name="mail-post" value="mail-post">
+                    </div>
+                    <div class="frame">
+                        <label>get from: </label>{% if sender %}{{ sender }}{% endif %}
+                        <div></div>
+                        <label>content:</label>
+                        <textarea name="mail-get-textarea0" class="textareashow" style="background: rgb(240, 240, 240);" >{% if mail_containt_get0 %}{{ mail_containt_get0 }}{% endif %}</textarea>
+                        <textarea name="mail-get-textarea1" class="textareashow" style="background: rgb(240, 240, 240);" >{% if mail_containt_get1 %}{{ mail_containt_get1 }}{% endif %}</textarea>
+                        {% if getQRimg %}
+                        <img src="{{ url_for('static', filename= './images/show.png',_t=val1) }}" width="160" height="160" alt="empty--"/>
+                        {% endif %}
+                        <div></div>
+                        <input type="submit" name="mail-get" value="mail-get">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="right">
+            <div>
+                <form method="POST" action="{{ url_for('mail',username=username) }}">
+                    <input type="submit" name="new-chain" value="new-chain">
+                    <input type="submit" name="get-chain" value="get-chain">
+{#                    <input type="submit" name="check-chain" value="check-chain">#}
+                </form>
+                <div class="frame">
+                    {% if response %}
+                        <pre id='show_json'>{{ response }}</pre>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

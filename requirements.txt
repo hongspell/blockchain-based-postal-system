@@ -1,0 +1,5 @@
+Flask
+flask_bcrypt
+requests
+pyzbar
+pillow
